@@ -8,8 +8,7 @@ def load_file_to_db(filename, table, conn):
     # Read local csv file into pandas dataframe (dictionary object)
     dataframe = pd.read_csv(filename)
     # Load pandas dataframe into database (create a table called "sample_table")
-    rows_affected = dataframe.to_sql(table, con=conn, if_exists="replace")
-    return rows_affected
+    dataframe.to_sql(table, con=conn, if_exists="replace")
 
 
 def preview_data(table, conn):
@@ -34,18 +33,22 @@ source_file = "data/sample_data.csv"
 # Initialize connection to database
 conn = sqlite3.connect("my_local.db")
 # Load the data into a table
-rows_updated = load_file_to_db(filename=source_file, table=table_name, conn=conn)
+load_file_to_db(filename=source_file, table=table_name, conn=conn)
 # Preview the table
 preview_data(table=table_name, conn=conn)
 
-sql = f"""
-Select
-    AVG(Value) as avg_val,
-    Variable_category
-    from
-        {table_name}
-    GROUP BY Variable_category
-    ORDER BY AVG(Value)
-"""
-
-create_chart(sql=sql, conn=conn, x="Variable_category", y="avg_val")
+# sql = f"""
+# Select
+#     AVG(Value) as avg_val,
+#     Variable_category
+#     from
+#         {table_name}
+#     GROUP BY Variable_category
+#     ORDER BY AVG(Value)
+# """
+#
+# create_chart(sql=sql, conn=conn, x="Variable_category", y="avg_val")
+#
+# # csv
+# # read csv into a python object (parsed ojbect) (io tool pandas tp get csv)
+# # store parsed object into a databse (io tool pandas used to post to sqlite)
