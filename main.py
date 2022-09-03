@@ -27,24 +27,26 @@ def create_chart(sql, conn, x, y):
     plt.show()
 
 
-# Hard code table name and local file path
-table_name = "sample_table"
-source_file = "data/sample_data.csv"
-# Initialize connection to database
-conn = sqlite3.connect("my_local.db")
-# Load the data into a table
-load_file_to_db(filename=source_file, table=table_name, conn=conn)
-# Preview the table
-preview_data(table=table_name, conn=conn)
 
-charts_sql = f"""
-Select
-    AVG(Value) as avg_val,
-    Variable_category
-    from
-        {table_name}
-    GROUP BY Variable_category
-    ORDER BY AVG(Value)
-"""
+if __name__ == "__main__":
+    # Hard code table name and local file path
+    table_name = "sample_table"
+    source_file = "data/sample_data.csv"
+    # Initialize connection to database
+    conn = sqlite3.connect("my_local.db")
+    # Load the data into a table
+    load_file_to_db(filename=source_file, table=table_name, conn=conn)
+    # Preview the table
+    preview_data(table=table_name, conn=conn)
 
-create_chart(sql=charts_sql, conn=conn, x="Variable_category", y="avg_val")
+    charts_sql = f"""
+    Select
+        AVG(Value) as avg_val,
+        Variable_category
+        from
+            {table_name}
+        GROUP BY Variable_category
+        ORDER BY AVG(Value)
+    """
+
+    create_chart(sql=charts_sql, conn=conn, x="Variable_category", y="avg_val")
