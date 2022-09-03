@@ -1,14 +1,14 @@
-import sqlite3
+import matplotlib.pyplot as plt
 import pandas as pd
 from pprint import pprint
-import matplotlib.pyplot as plt
+import sqlite3
 
 
 def load_file_to_db(filename, table, conn):
     # Read local csv file into pandas dataframe (dictionary object)
     dataframe = pd.read_csv(filename)
     # Load pandas dataframe into database (create a table called "sample_table")
-    dataframe.to_sql(table, con=conn, if_exists="replace")
+    dataframe.to_sql(name=table, con=conn, if_exists="replace")
 
 
 def preview_data(table, conn):
@@ -48,4 +48,3 @@ Select
 """
 
 create_chart(sql=charts_sql, conn=conn, x="Variable_category", y="avg_val")
-
