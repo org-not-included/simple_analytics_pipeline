@@ -28,12 +28,12 @@ source setup.sh
 ```
 ## ETL (Extract, Transform, Load) Terminology used within this code base
 ### An overview of what a Data Engieer does:
-```
+
 A data engineer is responsible for extracting (read), transforming (parse), and loading (save) the data in your database through a connection. They need to know:
 
 1) Coding (Python, SQL)
 2) Frameworks (Sqlite, Pandas)
-```
+
 
 ### Read a csv file (data)
 *Pre req: Use python3 sqlite to initialize a local db connection*
