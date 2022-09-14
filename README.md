@@ -35,7 +35,7 @@ A data engineer is responsible for extracting (read), transforming, and loading 
 2) Frameworks (Sqlite, Pandas)
 
 
-### Read a csv file (data)
+### Extarct (read a csv file)
 *Pre req: Use python3 sqlite to initialize a local db connection*
 
 Use pandas (io) to convert the csv into a python object (dictionary). The reason to convert it into a dict is because you can then use pandas to load a DataFrame into the database `your_database_name`.
