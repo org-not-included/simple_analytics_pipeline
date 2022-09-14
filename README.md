@@ -38,11 +38,9 @@ A data engineer is responsible for extracting (read), transforming (parse), and 
 ### Read a csv file (data)
 *Pre req: Use python3 sqlite to initialize a local db connection*
 
-Use pandas (io) to convert the csv into a python object (dictionary). The reason to convert it into a dict is because you can then use pandas to initialize a database with a name of your choice that expects the data to be in the above format.
-```
-csv -> Pandas (io read) -> python dict -> Pandas (io write) -> sqlite table with table name
-```
-### Functions used within the code base:
+Use pandas (io) to convert the csv into a python object (dictionary). The reason to convert it into a dict is because you can then use pandas to initialize a database with a name of your choice that expects the data to be in a dictionary.
+
+### Frameworks used within the code base:
 *Pre req: Have a connection to your database*
 ```
 import sqlite3
@@ -51,10 +49,13 @@ conn = sqlite3.connect(‘your_database_name’)
  
  Read a csv file and use pandas to read/convert it:
  Create a dataframe which is a pandas object (python dict with extra functionality) of the data that is read from csv.
+
+ `csv -> Pandas (io read) -> python dict -> Pandas (io write) -> sqlite table with table name`
+
 ```
  dataframe = pandas.read_csv(filename)
 ```
-
+### Load (save)
  Use Dataframe to write into your connection. Result is a table with the name of your choice stored in `your_database_name` specified by the connection:
 ```
 dataframe.to_sql(‘your_table_name’, conn)
