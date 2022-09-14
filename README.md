@@ -26,42 +26,57 @@ cd simple_analytics_pipeline
 ```text
 source setup.sh
 ```
-## ETL (Extract, Transform, Load) Terminology used within this code base
-### An overview of what a Data Engieer does:
 
-A data engineer is responsible for extracting (read), transforming, and loading (save) the data in your database through a connection. They need to know:
+## Process Overview
+### What a Data Engineer does
 
-1) Coding (Python, SQL)
-2) Frameworks (Sqlite, Pandas)
+A data engineer is responsible for Extracting (reading), Transforming, and Loading (saving) data between different locations in your environment. Primarily loading data into/out of your database/data warehouse.   
+As part of their skillset, they need to understand:
 
+1) Languages: 
+   1) `Python` (coding)
+   2) `SQL` (querying syntax)
+2) Tools:
+   1) `Pandas` (parse/transform)
+   2) `SQLite` (store)
+   3) `Matplotlib` (visualize)
 
-### Extarct (read a csv file)
-*Pre req: Use python3 sqlite to initialize a local db connection*
+### ETL (Extract, Transform, Load)
+0. Use python3 sqlite to initialize a local db connection:
 
-Use pandas (io) to convert the csv into a python object (dictionary). The reason to convert it into a dict is because you can then use pandas to load a DataFrame into the database `your_database_name`.
-
-### Frameworks used within the code base:
-*Pre req: Have a connection to your database*
 ```
 import sqlite3
 conn = sqlite3.connect(‘your_database_name’)
 ```
- 
+
+  ---  
+
+1/2. (**Extract/Transform**) Use pandas (io) to convert the csv into a python object (dictionary):
+
+```
+ dataframe = pandas.read_csv(filename)
+```
+
+The reason to convert it into a dict is because you can then use pandas to load a DataFrame into the database `your_database_name`.
+
  Read a csv file and use pandas to read/convert it:
  Create a dataframe which is a pandas object (python dict with extra functionality) of the data that is read from csv.
 
  `csv -> Pandas (io read) -> python dict -> Pandas (io write) -> sqlite table with table name`
 
+  ---  
+
+3. (**Load**)  Save the Pandas DataFrame into your database, in a new table called `sample_table`. 
+
 ```
- dataframe = pandas.read_csv(filename)
-```
-### Load (save)
-Load pandas DataFrame into database to create a table called `sample_table`. Use Dataframe to write into your connection. Result is a table with the name of your choice stored in `your_database_name` specified by the connection:
-```
-dataframe.to_sql(‘your_table_name’, conn)
+dataframe.to_sql(‘sample_table’, conn)
 ```
 
-### Transform
+Use Dataframe to write into your connection. Result is a table with the name of your choice stored in `your_database_name` specified by the connection.
+
+  ---  
+
+4. (**Optional**) Visualize the Result
 ```
 def create_chart(sql, conn, x, y):
     # Fetch query results as pandas dataframe (dictionary object)
