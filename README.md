@@ -29,7 +29,7 @@ source setup.sh
 ## ETL (Extract, Transform, Load) Terminology used within this code base
 ### An overview of what a Data Engieer does:
 
-A data engineer is responsible for extracting (read), transforming (parse), and loading (save) the data in your database through a connection. They need to know:
+A data engineer is responsible for extracting (read), transforming, and loading (save) the data in your database through a connection. They need to know:
 
 1) Coding (Python, SQL)
 2) Frameworks (Sqlite, Pandas)
@@ -59,4 +59,14 @@ conn = sqlite3.connect(‘your_database_name’)
 Load pandas DataFrame into database to create a table called `sample_table`. Use Dataframe to write into your connection. Result is a table with the name of your choice stored in `your_database_name` specified by the connection:
 ```
 dataframe.to_sql(‘your_table_name’, conn)
+```
+
+### transform
+```
+def create_chart(sql, conn, x, y):
+    # Fetch query results as pandas dataframe (dictionary object)
+    dataframe = pd.read_sql_query(sql, con=conn)
+    # pprint(dataframe)
+    dataframe.plot(x=x, y=y, kind="bar")
+    plt.show()
 ```
