@@ -61,7 +61,7 @@ Load pandas DataFrame into database to create a table called `sample_table`. Use
 dataframe.to_sql(‘your_table_name’, conn)
 ```
 
-### transform
+### Transform
 ```
 def create_chart(sql, conn, x, y):
     # Fetch query results as pandas dataframe (dictionary object)
