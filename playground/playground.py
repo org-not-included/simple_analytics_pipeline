@@ -19,8 +19,7 @@ def df_iter_rows(df):
     """
     print('(ITER_ROWS) Printing first 3 rows in the dataframe...')
     for index, row in df.iterrows():
-        if index == 3 :
-            break
+        if index == 3: break
         print('ROW:', index)
         print(row)
     
@@ -33,10 +32,24 @@ def df_iter_tuples(df):
     index = 0
     print('(ITER_TUPLES) Printing first 3 tuples in the dataframe...')
     for tuple in df.itertuples():
-        if index == 3 :
-            break
+        if index == 3: break
         print('TUPLE:', index)
         print(tuple)
+        index = index + 1 
+
+def df_iter_columns(df):
+    """converts df into a python list to print first 3 columns in df
+
+    Args:
+        df (dataframe): pandas dataframe
+    """
+    columns = list(df)
+    index = 0
+    print('(COLUMNS) Printing first 3 columns...')
+    for i in columns:
+        if index == 3: break
+        print('COLUMN:', index)
+        print (df[i])
         index = index + 1    
 
 if __name__ == "__main__":
@@ -44,3 +57,4 @@ if __name__ == "__main__":
     df = read_data(filename=source_file)
     df_iter_rows(df)
     df_iter_tuples(df)
+    df_iter_columns(df)
