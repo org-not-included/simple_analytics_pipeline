@@ -1,4 +1,3 @@
-from asyncore import read
 import pandas as pd
 
 def read_data(filename):
