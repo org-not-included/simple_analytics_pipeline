@@ -1,7 +1,10 @@
 import pandas as pd
+from pprint import pprint
+import sys
+import sqlite3
 
 def read_data(filename):
-    """uses pandas to read a csv file and convert it to a dataframe
+    """(pd.read_csv) uses pandas to read a csv file and convert it to a dataframe
 
     Args:
         filename (string): a csv filename 
@@ -12,7 +15,7 @@ def read_data(filename):
     return dataframe
     
 def df_iter_rows(df):
-    """uses dataframe.iterrows to print first 3 rows in df
+    """(dataframe.iterrows) uses dataframe.iterrows to print first 3 rows in df
 
     Args:
         df (dataframe): pandas dataframe
@@ -24,7 +27,7 @@ def df_iter_rows(df):
         print(row)
     
 def df_iter_tuples(df):
-    """uses dataframe.itertuples to print first 3 row tuples in df
+    """(dataframe.itertuples) uses dataframe.itertuples to print first 3 row tuples in df
 
     Args:
         df (dataframe): pandas dataframe
@@ -50,11 +53,39 @@ def df_iter_columns(df):
         if index == 3: break
         print('COLUMN:', index)
         print (df[i])
-        index = index + 1    
+        index = index + 1
+
+def load_file_into_db(filename, table, conn):
+    """(dataframe.to_sql) load a table into a database connection istance
+
+    Args:
+        filename (string): name of the file
+        table (string): name of the table
+        conn (db): connection to sqlite database instance 
+    """
+    dataframe = pd.read_csv(filename)
+    dataframe.to_sql(name=table, con=conn, if_exists="replace")
+
+def preview_data_in_db(table, conn):
+    """(pd.read_sql) read table contents in a database connection istance to print first 10 rows
+
+    Args:
+        table (string): name of the table
+        conn (db): connection to sqlite database instance 
+    """
+    sql = f"SELECT * FROM '{table}' limit 10;"
+    dataframe = pd.read_sql(sql=sql, con=conn)
+    pprint(dataframe)
 
 if __name__ == "__main__":
     source_file = "../data/sample_data.csv"
-    df = read_data(filename=source_file)
-    df_iter_rows(df)
-    df_iter_tuples(df)
-    df_iter_columns(df)
+    if (sys.argv[1] == 'dataframe'):
+        df = read_data(filename=source_file)
+        df_iter_rows(df)
+        df_iter_tuples(df)
+        df_iter_columns(df)
+    elif (sys.argv[1] == 'sqlite'):
+        table_name = "sample_table"
+        conn = sqlite3.connect("my_playground.db")
+        load_file_into_db(source_file, table_name, conn)
+        preview_data_in_db(table_name, conn)
