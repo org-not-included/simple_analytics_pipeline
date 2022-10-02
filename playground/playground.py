@@ -79,10 +79,16 @@ def preview_data_in_db(table, conn):
 
 if __name__ == "__main__":
     source_file = "../data/sample_data.csv"
-    if (sys.argv[1] == 'dataframe'):
+    if (sys.argv[1] == 'df-read'):
+        df = read_data(filename=source_file)
+    elif (sys.argv[1] == 'df-iterrows'):
         df = read_data(filename=source_file)
         df_iter_rows(df)
+    elif (sys.argv[1] == 'df-itertuples'):
+        df = read_data(filename=source_file)
         df_iter_tuples(df)
+    elif (sys.argv[1] == 'df-itercolumns'):
+        df = read_data(filename=source_file)
         df_iter_columns(df)
     elif (sys.argv[1] == 'sqlite'):
         table_name = "sample_table"
