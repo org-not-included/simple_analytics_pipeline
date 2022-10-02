@@ -92,6 +92,8 @@ if __name__ == "__main__":
     elif (sys.argv[1] == 'df-itercolumns'):
         df = read_data(filename=source_file)
         df_iter_columns(df)
+    elif (sys.argv[1] == 'db-load'):
+        load_file_into_db(source_file, table_name, conn)
     elif (sys.argv[1] == 'db-load-read'):
         load_file_into_db(source_file, table_name, conn)
         preview_data_in_db(table_name, conn)

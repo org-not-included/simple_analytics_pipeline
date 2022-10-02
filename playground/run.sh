@@ -4,7 +4,8 @@ echo "1. df-read"
 echo "2. df-iterrows"
 echo "3. df-itertuples"
 echo "4. df-itercolumns"
-echo "5. load-read-db"
+echo "5. db-load"
+echo "6. db-load-read"
 
 read varname
 
@@ -20,6 +21,9 @@ elif [[ "${varname}" == "3" ]]; then
 elif [[ "${varname}" == "4" ]]; then 
   python3 playground.py df-itercolumns
 elif [[ "${varname}" == "5" ]]; then 
+  echo "(dataframe.to_sql) load a table into a database connection istance"
+  python3 playground.py db-load
+elif [[ "${varname}" == "6" ]]; then 
   echo "(dataframe.to_sql) load a table into a database connection istance"
   echo "(pd.read_sql) read table contents in a database connection istance to print first 10 rows"
   python3 playground.py db-load-read
