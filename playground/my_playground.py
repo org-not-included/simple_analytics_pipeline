@@ -80,7 +80,7 @@ def preview_data_in_db(table, conn):
 if __name__ == "__main__":
     source_file = "../data/sample_data.csv"
     table_name = "sample_table"
-    conn = sqlite3.connect("my_playground.db")
+    conn = sqlite3.connect("my_local.db")
     if (sys.argv[1] == 'df-read'):
         df = read_data(filename=source_file)
     elif (sys.argv[1] == 'df-iterrows'):

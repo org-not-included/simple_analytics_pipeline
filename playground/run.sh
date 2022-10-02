@@ -11,22 +11,22 @@ read varname
 
 if [[ "${varname}" == "1" ]];then
   echo "(pd.read_csv) uses pandas to read a csv file and convert it to a dataframe"
-  python3 playground.py df-read
+  python3 my_playground.py df-read
 elif [[ "${varname}" == "2" ]]; then 
   echo "(dataframe.iterrows) uses dataframe.iterrows to print first 3 rows in df"
-  python3 playground.py df-iterrows
+  python3 my_playground.py df-iterrows
 elif [[ "${varname}" == "3" ]]; then 
   echo "(dataframe.itertuples) uses dataframe.itertuples to print first 3 row tuples in df"
-  python3 playground.py df-itertuples
+  python3 my_playground.py df-itertuples
 elif [[ "${varname}" == "4" ]]; then 
-  python3 playground.py df-itercolumns
+  python3 my_playground.py df-itercolumns
 elif [[ "${varname}" == "5" ]]; then 
   echo "(dataframe.to_sql) load a table into a database connection istance"
-  python3 playground.py db-load
+  python3 my_playground.py db-load
 elif [[ "${varname}" == "6" ]]; then 
   echo "(dataframe.to_sql) load a table into a database connection istance"
   echo "(pd.read_sql) read table contents in a database connection istance to print first 10 rows"
-  python3 playground.py db-load-read
+  python3 my_playground.py db-load-read
 else
   echo "Invalid input"
 fi
