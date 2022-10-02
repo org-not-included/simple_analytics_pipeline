@@ -1,4 +1,5 @@
 # Local Environment
 .idea/
 my_local.db
-playground/my_playground.db
+playground/my_local.db
+playground/__pycache__
