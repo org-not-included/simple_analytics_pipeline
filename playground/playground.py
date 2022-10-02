@@ -79,6 +79,8 @@ def preview_data_in_db(table, conn):
 
 if __name__ == "__main__":
     source_file = "../data/sample_data.csv"
+    table_name = "sample_table"
+    conn = sqlite3.connect("my_playground.db")
     if (sys.argv[1] == 'df-read'):
         df = read_data(filename=source_file)
     elif (sys.argv[1] == 'df-iterrows'):
@@ -90,8 +92,6 @@ if __name__ == "__main__":
     elif (sys.argv[1] == 'df-itercolumns'):
         df = read_data(filename=source_file)
         df_iter_columns(df)
-    elif (sys.argv[1] == 'sqlite'):
-        table_name = "sample_table"
-        conn = sqlite3.connect("my_playground.db")
+    elif (sys.argv[1] == 'db-load-read'):
         load_file_into_db(source_file, table_name, conn)
         preview_data_in_db(table_name, conn)
