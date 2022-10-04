@@ -14,10 +14,10 @@ def preview_data_in_db(table, conn):
     dataframe = pd.read_sql(sql=sql, con=conn)
     pprint(dataframe)
     
-# def show_full_columns(table, conn):
-#     sql = f"SHOW FULL COLUMNS FROM '{table}';"
-#     dataframe = pd.read_sql(sql=sql, con=conn)
-#     pprint(dataframe)
+def show_full_columns(table, conn):
+    sql = f"SELECT * FROM PRAGMA_TABLE_INFO('{table}');"
+    dataframe = pd.read_sql(sql=sql, con=conn)
+    pprint(dataframe)
     
 if __name__ == "__main__" :
     source_file = "../data/sample_data.csv"
@@ -25,5 +25,5 @@ if __name__ == "__main__" :
     conn = sqlite3.connect("my_local.db")
     load_file_into_db(source_file, table_name, conn)
     preview_data_in_db(table_name, conn)
-    # show_full_columns(table_name, conn)
+    show_full_columns(table_name, conn)
     
