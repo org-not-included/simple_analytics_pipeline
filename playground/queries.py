@@ -42,9 +42,21 @@ def sql_where(table, conn):
     pprint(dataframe)
     print("First names, salary, gender of female employees with salary greater than 5000")
     sql = f"SELECT [first name], salary, gender FROM '{table}' WHERE salary>5000 AND gender='Female' AND [first name] IS NOT Null;"
-    # sql2 = f"SELECT DISTINCT gender FROM {table} ORDER BY gender DESC;"
     dataframe = pd.read_sql(sql=sql, con=conn)
     pprint(dataframe)
+    sql2 = f"SELECT DISTINCT gender FROM {table} ORDER BY gender DESC;"
+    dataframe = pd.read_sql(sql=sql2, con=conn)
+    pprint(dataframe)
+    sql3 = f"select count(*) from '{table}' where [first name] is null;"
+    dataframe = pd.read_sql(sql=sql3, con=conn)
+    pprint(dataframe)
+    # sql4 = f"""
+    # SELECT [first name] as first_name, gender as gender FROM '{table}'
+    #     WHERE gender = "Female" GROUP BY [first name]
+    #     ORDER BY [salary];
+    # """
+    # dataframe = pd.read_sql(sql=sql4, con=conn)
+    # pprint(dataframe)
 
 if __name__ == "__main__" :
     source_file = "../data/employees.csv"
